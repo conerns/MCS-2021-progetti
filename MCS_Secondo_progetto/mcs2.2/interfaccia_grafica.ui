@@ -1,0 +1,226 @@
+<?xml version='1.0' encoding='utf-8'?>
+<interface version="1.1">
+  <object class="tk.Toplevel" id="frame_schermata">
+    <property name="background">#e3e3e3</property>
+    <property name="geometry">1100x600</property>
+    <property name="resizable">none</property>
+    <child>
+      <object class="tk.Frame" id="immagine_inserita">
+        <property name="background">#e3e3e3</property>
+        <property name="height">200</property>
+        <property name="width">200</property>
+        <layout manager="place">
+          <property name="anchor">center</property>
+          <property name="relx">0.5</property>
+          <property name="rely">0.09</property>
+          <property name="x">0</property>
+          <property name="y">0</property>
+        </layout>
+        <child>
+          <object class="tk.Label" id="testo_selezione">
+            <property name="background">#e3e3e3</property>
+            <property name="disabledforeground">#fa6247</property>
+            <property name="font">{Candara} 14 </property>
+            <property name="state">normal</property>
+            <property name="text" translatable="yes">Seleziona immagine</property>
+            <layout manager="pack">
+              <property name="padx">20</property>
+              <property name="pady">20</property>
+              <property name="propagate">True</property>
+              <property name="side">left</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="tk.Button" id="vera_selezione">
+            <property name="background">#f0f0f0</property>
+            <property name="borderwidth">3</property>
+            <property name="command" type="command" cbtype="simple">on_browse_button</property>
+            <property name="compound">top</property>
+            <property name="default">normal</property>
+            <property name="disabledforeground">#fa6247</property>
+            <property name="font">{Candara} 14 </property>
+            <property name="padx">2</property>
+            <property name="pady">2</property>
+            <property name="state">normal</property>
+            <property name="text" translatable="yes">Sfoglia</property>
+            <bind sequence="" handler="" add="" />
+            <layout manager="pack">
+              <property name="padx">10</property>
+              <property name="pady">20</property>
+              <property name="propagate">True</property>
+              <property name="side">top</property>
+            </layout>
+          </object>
+        </child>
+      </object>
+    </child>
+    <child>
+      <object class="tk.Frame" id="inserimento_f">
+        <property name="background">#e3e3e3</property>
+        <property name="height">150</property>
+        <property name="width">200</property>
+        <layout manager="place">
+          <property name="anchor">nw</property>
+          <property name="relx">0.02</property>
+          <property name="rely">0.15</property>
+          <property name="x">0</property>
+          <property name="y">0</property>
+        </layout>
+        <child>
+          <object class="tk.Label" id="inserisci_f">
+            <property name="background">#e3e3e3</property>
+            <property name="disabledforeground">#fa6247</property>
+            <property name="font">{Candara} 14 </property>
+            <property name="state">normal</property>
+            <property name="takefocus">false</property>
+            <property name="text" translatable="yes">Valore F:</property>
+            <layout manager="grid">
+              <property name="column">0</property>
+              <property name="propagate">True</property>
+              <property name="row">0</property>
+              <property name="sticky">e</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="tk.Entry" id="entry_f">
+            <property name="text" translatable="yes">1</property>
+            <layout manager="grid">
+              <property name="column">6</property>
+              <property name="propagate">True</property>
+              <property name="row">0</property>
+              <property name="sticky">e</property>
+            </layout>
+          </object>
+        </child>
+      </object>
+    </child>
+    <child>
+      <object class="tk.Frame" id="inserimento_d">
+        <property name="background">#e3e3e3</property>
+        <property name="height">150</property>
+        <property name="width">200</property>
+        <layout manager="place">
+          <property name="anchor">nw</property>
+          <property name="relx">0.232</property>
+          <property name="rely">0.15</property>
+          <property name="x">0</property>
+          <property name="y">0</property>
+        </layout>
+        <child>
+          <object class="tk.Label" id="inserisci_d">
+            <property name="background">#e3e3e3</property>
+            <property name="disabledforeground">#fa6247</property>
+            <property name="font">{Candara} 14 </property>
+            <property name="state">normal</property>
+            <property name="takefocus">false</property>
+            <property name="text" translatable="yes">Valore D:</property>
+            <layout manager="grid">
+              <property name="column">0</property>
+              <property name="propagate">True</property>
+              <property name="row">0</property>
+              <property name="sticky">e</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="tk.Entry" id="entry_d">
+            <property name="text" translatable="yes">1</property>
+            <layout manager="grid">
+              <property name="column">6</property>
+              <property name="propagate">True</property>
+              <property name="row">0</property>
+              <property name="sticky">e</property>
+            </layout>
+          </object>
+        </child>
+      </object>
+    </child>
+    <child>
+      <object class="ttk.Frame" id="immagine_selezionata">
+        <property name="padding">2</property>
+        <property name="relief">flat</property>
+        <layout manager="place">
+          <property name="anchor">nw</property>
+          <property name="height">450</property>
+          <property name="relx">0.01</property>
+          <property name="rely">0.20</property>
+          <property name="width">450</property>
+          <property name="x">0</property>
+          <property name="y">0</property>
+        </layout>
+        <child>
+          <object class="tk.Canvas" id="canvas1">
+            <property name="confine">false</property>
+            <property name="takefocus">false</property>
+            <bind sequence="" handler="" add="" />
+            <layout manager="pack">
+              <property name="anchor">n</property>
+              <property name="expand">true</property>
+              <property name="fill">both</property>
+              <property name="padx">2</property>
+              <property name="pady">2</property>
+              <property name="propagate">True</property>
+              <property name="side">top</property>
+            </layout>
+          </object>
+        </child>
+      </object>
+    </child>
+    <child>
+      <object class="ttk.Frame" id="immagine_processata">
+        <property name="padding">2</property>
+        <property name="relief">flat</property>
+        <layout manager="place">
+          <property name="anchor">nw</property>
+          <property name="height">450</property>
+          <property name="relx">0.58</property>
+          <property name="rely">0.20</property>
+          <property name="width">450</property>
+          <property name="x">0</property>
+          <property name="y">0</property>
+        </layout>
+        <child>
+          <object class="tk.Canvas" id="canvas2">
+            <property name="confine">false</property>
+            <property name="takefocus">false</property>
+            <bind sequence="" handler="" add="" />
+            <layout manager="pack">
+              <property name="anchor">n</property>
+              <property name="expand">true</property>
+              <property name="fill">both</property>
+              <property name="padx">2</property>
+              <property name="pady">2</property>
+              <property name="propagate">True</property>
+              <property name="side">top</property>
+            </layout>
+          </object>
+        </child>
+      </object>
+    </child>
+    <child>
+      <object class="tk.Button" id="processa_immagine">
+        <property name="background">#f0f0f0</property>
+        <property name="borderwidth">3</property>
+        <property name="command" type="command" cbtype="simple">on_process_button</property>
+        <property name="compound">top</property>
+        <property name="default">normal</property>
+        <property name="disabledforeground">#fa6247</property>
+        <property name="font">{Candara} 14 </property>
+        <property name="padx">2</property>
+        <property name="pady">2</property>
+        <property name="state">normal</property>
+        <property name="text" translatable="yes">Converti</property>
+        <bind sequence="" handler="" add="" />
+        <layout manager="place">
+          <property name="anchor">center</property>
+          <property name="relx">0.50</property>
+          <property name="rely">0.50</property>
+          <property name="x">0</property>
+          <property name="y">0</property>
+        </layout>
+      </object>
+    </child>
+  </object>
+</interface>
