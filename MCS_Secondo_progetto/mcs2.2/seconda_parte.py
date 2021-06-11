@@ -11,17 +11,17 @@ from PIL import Image, ImageTk
 def render_image(F, d, self):
     image = self.to_process
     matrice = np.array(image)
-    # questa è una prova fatta su tutta la matrice
     print("dimensione iniziale: ", matrice.shape)
     F = int(F)
     d = int(d)
     if 0 <= F <= min(matrice.shape) and 0 <= d <= (2 * F - 2):
 
-        nrighe = int(matrice.shape[0] / F)
-        ncolonne = int(matrice.shape[1] / F)
+        numero_blocchi_per_riga = int(matrice.shape[0] / F)
+        numero_blocchi_per_colonna = int(matrice.shape[1] / F)
+
         righeDaTogliere = matrice.shape[0] % F
         colonneDaTogliere = matrice.shape[1] % F
-        #print(righeDaTogliere, colonneDaTogliere)
+
         if righeDaTogliere != 0:
             matrice = matrice[:-righeDaTogliere, :]
         if colonneDaTogliere != 0:
@@ -30,15 +30,16 @@ def render_image(F, d, self):
         print("dimensione finale: ", matrice.shape)
         blocco = []
 
-        for i in range(nrighe):
-            for j in range(ncolonne):
+        for i in range(numero_blocchi_per_riga):
+            for j in range(numero_blocchi_per_colonna):
                 blocco = matrice[i * F:(i + 1) * F, j * F:(j + 1) * F]
-                # print(modifico)
+
                 x = fft.dctn(blocco, norm="ortho", type=2)
                 for k in range(x.shape[0]):
                     for l in range(x.shape[1]):
                         if k + l >= d:
                             x[k][l] = 0
+
                 y = fft.idctn(x, norm="ortho", type=2)
                 for k in range(y.shape[0]):
                     for l in range(y.shape[1]):
@@ -48,9 +49,11 @@ def render_image(F, d, self):
                         if y[k][l] > 255:
                             y[k][l] = 255
                 matrice[i * F:(i + 1) * F, j * F:(j + 1) * F] = y
+
         ricostruire = Image.fromarray(matrice)
         ricostruire.save("finale.bmp")
         ricostruire.show()
+
         self.show_img = ImageTk.PhotoImage(ricostruire)
         canvas = self.builder.get_object('canvas2')
         canvas.create_image(5, 5, anchor='nw', image=self.show_img)
@@ -75,7 +78,6 @@ class Application:
         canvas = self.builder.get_object('canvas1')
         # Load image in canvas
         image_to_display = Image.open(filename)
-        # https://stackoverflow.com/questions/64851748/tkinter-python-converting-an-image-to-black-and-white
         image_to_display = image_to_display.convert("L")
         image_to_display.thumbnail((460, 460))
         self.to_process = image_to_display
