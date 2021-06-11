@@ -57,5 +57,5 @@ for i in range(0, len(files)):
 
     print("Errore relativo: ", errore_relativo)
     with open('python_run.csv', 'a', newline='') as file:# ad ogni run appendo per ogni file i valori necessari
-        writer = csv.writer(file,delimiter='|')
+        writer = csv.writer(file,delimiter=',')
         writer.writerow([files[i], elapsed, errore_relativo,mempria_usata])
