@@ -10,30 +10,29 @@ from PIL import Image, ImageTk
 
 def render_image(F, d, self):
     image = self.to_process
-    data = np.array(image)
+    matrice = np.array(image)
     # questa è una prova fatta su tutta la matrice
-    print("dimensione iniziale: ", data.shape)
+    print("dimensione iniziale: ", matrice.shape)
     F = int(F)
     d = int(d)
-    if 0 <= F <= min(data.shape) and 0 <= d <= (2 * F - 2):
+    if 0 <= F <= min(matrice.shape) and 0 <= d <= (2 * F - 2):
 
-        nrighe = int(data.shape[0] / F)
-        ncolonne = int(data.shape[1] / F)
-        righeDaTogliere = data.shape[0] % F
-        colonneDaTogliere = data.shape[1] % F
+        nrighe = int(matrice.shape[0] / F)
+        ncolonne = int(matrice.shape[1] / F)
+        righeDaTogliere = matrice.shape[0] % F
+        colonneDaTogliere = matrice.shape[1] % F
         #print(righeDaTogliere, colonneDaTogliere)
         if righeDaTogliere != 0:
-            data = data[:-righeDaTogliere, :]
+            matrice = matrice[:-righeDaTogliere, :]
         if colonneDaTogliere != 0:
-            data = data[:, :-colonneDaTogliere]
+            matrice = matrice[:, :-colonneDaTogliere]
 
-        # data = data[:-righeDaTogliere, :-colonneDaTogliere]
-        print("dimensione finale: ", data.shape)
+        print("dimensione finale: ", matrice.shape)
         blocco = []
 
         for i in range(nrighe):
             for j in range(ncolonne):
-                blocco = data[i * F:(i + 1) * F, j * F:(j + 1) * F]
+                blocco = matrice[i * F:(i + 1) * F, j * F:(j + 1) * F]
                 # print(modifico)
                 x = fft.dctn(blocco, norm="ortho", type=2)
                 for k in range(x.shape[0]):
@@ -48,8 +47,8 @@ def render_image(F, d, self):
                             y[k][l] = 0
                         if y[k][l] > 255:
                             y[k][l] = 255
-                data[i * F:(i + 1) * F, j * F:(j + 1) * F] = y
-        ricostruire = Image.fromarray(data)
+                matrice[i * F:(i + 1) * F, j * F:(j + 1) * F] = y
+        ricostruire = Image.fromarray(matrice)
         ricostruire.save("finale.bmp")
         ricostruire.show()
         self.show_img = ImageTk.PhotoImage(ricostruire)

@@ -63,27 +63,30 @@ elapsed2 = [0] * 8
 
 """
 dopo aver eseguito dei test preliminari, in  modo da non ottenere tempi di escuzioni pari a 0
-dalla fft, e avere quindi dei risultati validi, siamo arrivati a delle matrici di dimensioni 
+dalla fft, e avere quindi dei risultati validi, siamo arrivati a delle matrici di dimensioni
 intorno a 200*200.
 Dato che la DCT2 fatta da noi impiega O(n^3) nel caso peggiore, ci siamo limitati superioremente
 a una matrice 550*550 che comporta di per se dei tempi decisamente elevati.
 """
 
 dim = [200, 250, 300, 350, 400, 450, 500, 550]
-for i in range(len(dim)):
+for i in range(len(dim)-4):
     print(i)  # tenuto per capire durante l'esecuzione in che iterazione ci si trova
 
     test2 = np.random.randint(low=0, high=255, size=(dim[i], dim[i]))
 
     t1 = time.time()
     x = fft.dctn(test2, norm="ortho", type=2)
-    print(math.log(time.time() - t1))
+    elapsed1 = time.time() - t1;
+    print(elapsed1);
 
     rc = np.shape(test2)  # usato per poi poter eseguire la DCT righe/colonne
 
     t2 = time.time()
     dct2_completa = DCT_riga(test2)
     elapsed2[i] = time.time() - t2
+
+    print(elapsed1, " ", elapsed2[i])
 
 for i in range(len(elapsed2)):
     if elapsed2[i] > 0:
