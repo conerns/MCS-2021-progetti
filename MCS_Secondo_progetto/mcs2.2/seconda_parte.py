@@ -6,10 +6,11 @@ import pathlib
 from scipy import fft
 import numpy as np
 from PIL import Image, ImageTk
+from copy import copy
 
 
 def render_image(F, d, self):
-    image = self.to_process
+    image = self.temp_image
     matrice = np.array(image)
     print("dimensione iniziale: ", matrice.shape)
     F = int(F)
@@ -51,9 +52,9 @@ def render_image(F, d, self):
                 matrice[i * F:(i + 1) * F, j * F:(j + 1) * F] = y
 
         ricostruire = Image.fromarray(matrice)
-        ricostruire.save("finale.bmp")
+        ricostruire.save("f134d35.bmp")
         ricostruire.show()
-
+        ricostruire.thumbnail((460, 460))
         self.show_img = ImageTk.PhotoImage(ricostruire)
         canvas = self.builder.get_object('canvas2')
         canvas.create_image(5, 5, anchor='nw', image=self.show_img)
@@ -79,8 +80,10 @@ class Application:
         # Load image in canvas
         image_to_display = Image.open(filename)
         image_to_display = image_to_display.convert("L")
+        # salvata per mostrare una immagine che abbia fit nella finestra, e lavorare sull'intera immagine
+        self.temp_image = copy(image_to_display)
+
         image_to_display.thumbnail((460, 460))
-        self.to_process = image_to_display
         self.img = ImageTk.PhotoImage(image_to_display)
         canvas.create_image(5, 5, anchor='nw', image=self.img)
 
